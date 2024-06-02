@@ -1,0 +1,103 @@
+
+
+
+/*===========================
+     07.EVENT css 
+===========================*/
+
+/*.wedding-events{
+	background: $brand-white;
+	.ceremony-bg{
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		position: relative;
+		height: 400px;
+	}
+	.desc{
+		padding: 2em;
+		h3{
+			font-size: 30px;
+		}
+		p{
+			strong{
+				font-size: 14px;
+			}
+		}
+	}
+}*/
+
+//.event_area{}
+
+//.single_event{
+.wedding-events {
+  background: $brand-white;
+  margin-top: 30px;
+    
+    & .event_image{
+        overflow: hidden;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        
+        & img{
+            width: 100%;
+            height: 400px;
+            @include transition(0.3s);
+        }
+    }
+    //& .event_content{
+      & .desc {
+        padding: 2em;//25px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: $brand_white;
+        @include box-shadow (0px 3px 6px 0px rgba($shadow, 0.35));
+        @include transition(0.3s);
+        
+        /*& .date{
+            font-size: 16px;
+            color: $body-color;
+        }*/
+        //& .event_title{
+          & h3 {
+            font-size: 30px;
+            & a{
+                font-size: 30px;
+                color: $dark-text-color;
+                margin-top: 20px;
+                @include transition(0.3s);
+                
+                &:hover{
+                    color: $brand-primary;
+                }
+            }
+        }
+        & p{
+            margin-top: 15px;
+            strong {
+              font-size: 14px;
+            }
+        }
+        & .more{
+            //color: $body-color;
+            margin-top: 15px;
+            @include transition(0.3s);
+                
+            &:hover{
+                color: $brand-primary;
+            }
+        }
+    }
+    
+    &:hover{
+        & .event_image{
+            & img{
+                @include transform(scale(1.1));
+            }
+        }
+        
+        & .event_content{
+            @include box-shadow (0px 3px 16px 0px rgba($shadow, 0.35));
+        }
+    }
+}
