@@ -77,10 +77,21 @@ gulp.task('html', async function() {
 
 gulp.task('default', gulp.series('html', 'js', 'sass', 'connect', 'watch'));
 
+gulp.task('build', async function() {
+  gulp.src('*.html')
+  .pipe(gulp.dest(outputDir))
+  gulp.src('css/*.css')
+  .pipe(gulp.dest(outputDir + '/' + outputCSSDir))
+  gulp.src(outputDir+'/*.js')
+  .pipe(gulp.dest(outputDir + '/' + outputDir))
+  gulp.src('./images/**/*.jpg')
+  .pipe(gulp.dest(outputDir + '/' + 'images'))
+});
+
 /**
  * Push build to gh-pages
  */
-gulp.task('deploy', function () {
+gulp.task('deploy', async function () {
   return gulp.src("./dist/**/*")
     .pipe(deploy())
 });
