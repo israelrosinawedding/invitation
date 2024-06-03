@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    deploy = require('gulp-gh-pages'),
     gutil = require('gulp-util'),
     sass = require('gulp-sass')(require('sass'));   //require('gulp-sass'),
     connect = require('gulp-connect'),
@@ -75,3 +76,11 @@ gulp.task('html', async function() {
 //gulp.task('default', ['html', 'js', 'sass', 'connect', 'watch']);
 
 gulp.task('default', gulp.series('html', 'js', 'sass', 'connect', 'watch'));
+
+/**
+ * Push build to gh-pages
+ */
+gulp.task('deploy', function () {
+  return gulp.src("./dist/**/*")
+    .pipe(deploy())
+});
