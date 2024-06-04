@@ -84,14 +84,16 @@ gulp.task('build', async function() {
   .pipe(gulp.dest(outputDir + '/' + outputCSSDir))
   gulp.src(outputDir+'/*.js')
   .pipe(gulp.dest(outputDir + '/' + outputDir))
-  gulp.src('./images/**/*.jpg')
+  gulp.src('./images/**/*')
   .pipe(gulp.dest(outputDir + '/' + 'images'))
+  gulp.src('./fonts/**/*')
+  .pipe(gulp.dest(outputDir + '/' + 'fonts'))
 });
 
 /**
  * Push build to gh-pages
  */
-gulp.task('deploy', async function () {
+gulp.task('deploy', function () {
   return gulp.src("./dist/**/*")
     .pipe(deploy())
 });
