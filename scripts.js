@@ -796,6 +796,13 @@ google.maps.event.addDomListener(window, 'load', init);
 			disableHI: true
 		});
 
+
+		$('#fh5co-primary-menu li a').each(function() {
+			$(this).parent().removeClass('active');
+			if ($(this).attr('href') == location.href.split("/").slice(-1)){ 
+				$(this).parent().addClass('active'); }
+		});
+
 	};
 
 	// Parallax
@@ -914,11 +921,34 @@ google.maps.event.addDomListener(window, 'load', init);
 	};
 
 	//FA
-	var request;
+	
+	function getHTMLContent(fileName) {
 
-	function getHTMLContent() {
+		var url = fileName; //"header.html"; //"NewFile1.html";
+		var request;
 
-		var url = "header.html";//fileName; //"NewFile1.html";
+		var readyFunction = () => {
+			if (request.readyState == 4) {
+				var val = request.responseText;
+				//console.log("content: " + val);
+				var startContent = document.getElementById('fh5co-page').innerHTML;
+				document.getElementById('fh5co-page').innerHTML = val + startContent;
+				
+			}
+		}
+	
+		if(fileName === "footer.html"){
+			readyFunction = () => {
+				if (request.readyState == 4) {
+					var val = request.responseText;
+					//console.log("contentFooter: " + val);
+					//var startContent = document.getElementById('footer').innerHTML;
+					//document.getElementById('footer').innerHTML = val + startContent;
+					document.getElementById('footer').innerHTML = val;
+				}
+			}
+		}
+		
 
 		if (window.XMLHttpRequest) {
 			request = new XMLHttpRequest();
@@ -928,7 +958,7 @@ google.maps.event.addDomListener(window, 'load', init);
 		}
 
 		try {
-			request.onreadystatechange = getInfo;
+			request.onreadystatechange = readyFunction;//getInfo;
 			request.open("GET", url, true);
 			request.send();
 		}
@@ -937,15 +967,7 @@ google.maps.event.addDomListener(window, 'load', init);
 		}
 	}
 
-	function getInfo() {
-		if (request.readyState == 4) {
-			var val = request.responseText;
-			console.log("content: " + val);
-			var startContent = document.getElementById('fh5co-page').innerHTML;
-			document.getElementById('fh5co-page').innerHTML = val + startContent;
-			
-		}
-	}
+	
 	//FA
 
 	// Set the date we're counting down to
@@ -985,8 +1007,9 @@ google.maps.event.addDomListener(window, 'load', init);
 	}, 1000);
 
 	// Document on load.
+	getHTMLContent("header.html");
+	getHTMLContent("footer.html");
 
-	getHTMLContent();
 	/*mainMenu();
 		//parallax();
 		offcanvas();
@@ -995,7 +1018,7 @@ google.maps.event.addDomListener(window, 'load', init);
 		stickyBanner();*/
 
 	$(function(){
-		//getHTMLContent();
+		
 		mainMenu();
 		
 		offcanvas();
