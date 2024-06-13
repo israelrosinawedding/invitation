@@ -766,6 +766,7 @@ figure {
 .fh5co-cover {
   background-size: cover;
   position: relative;
+  background-position: center !important; /*FA*/
 }
 @media screen and (max-width: 768px) {
   .fh5co-cover {
